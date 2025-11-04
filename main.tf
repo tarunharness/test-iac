@@ -14,6 +14,6 @@ resource "null_resource" "example" {
   count = 1
 
   triggers = {
-    large_data = file("large_data_1mb.json")
+    large_data = file("large_data_25mb.json")
   }
 }
