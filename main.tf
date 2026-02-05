@@ -51,20 +51,13 @@ data "vault_kv_secret_v2" "example" {
 # }
 
 # Fetch specific secret from a different path
-data "vault_kv_secret_v2" "database" {
-  mount = "secret"
-  name  = "myapp/database"
-}
+# data "vault_kv_secret_v2" "database" {
+#  mount = "secret"
+#  name  = "myapp/database"
+#}
 
 # Output the secret values
 output "secret_data" {
   description = "All secret data from Vault"
-  value       = data.vault_kv_secret_v2.example.data
-  sensitive   = true
-}
-
-output "specific_secret_value" {
-  description = "A specific secret value (api_key)"
-  value       = try(data.vault_kv_secret_v2.example.data["api_key"], "not-found")
-  sensitive   = true
+  value       = data.vault_kv_secret_v2.example["account-vaultSOTHpU7KHx"]
 }
