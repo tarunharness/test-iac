@@ -42,8 +42,7 @@ provider "vault" {
 
 # Fetch secret from Vault KV v2
 data "vault_kv_secret_v2" "example" {
-  mount = "harness"  # KV v2 mount path
-  name  = "Git-3"  # Secret path
+  path = "secret/harness"
 }
 
 # Fetch secret from Vault KV v1 (if using KV v1)
