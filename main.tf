@@ -60,5 +60,5 @@ data "vault_kv_secret_v2" "example" {
 # Output the secret values
 output "secret_data" {
   description = "All secret data from Vault"
-  value       = data.vault_kv_secret_v2.example["Git-3"]
+  value       = data.vault_kv_secret_v2.example.data
 }
