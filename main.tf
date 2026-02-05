@@ -42,7 +42,8 @@ provider "vault" {
 
 # Fetch secret from Vault KV v2
 data "vault_kv_secret_v2" "example" {
-  path = "secret/harness"
+  mount = "harness/jwt"
+  name = "harness"
 }
 
 # Fetch secret from Vault KV v1 (if using KV v1)
@@ -59,5 +60,5 @@ data "vault_kv_secret_v2" "example" {
 # Output the secret values
 output "secret_data" {
   description = "All secret data from Vault"
-  value       = data.vault_kv_secret_v2.example["account-vaultSOTHpU7KHx"]
+  value       = data.vault_kv_secret_v2.example["Git-3"]
 }
