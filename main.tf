@@ -24,15 +24,15 @@ provider "vault" {
   auth_login_jwt {
     # Mount path where JWT auth is enabled in Vault
     # Reads from VAULT_JWT_MOUNT_PATH environment variable (default: "jwt")
-    mount = coalesce(try(env("VAULT_JWT_MOUNT_PATH"), null), "jwt")
+    mount = env.VAULT_JWT_MOUNT_PATH
     
     # Role to authenticate with
     # Reads from VAULT_JWT_ROLE environment variable (required)
-    role = env("VAULT_JWT_ROLE")
+    role = env.VAULT_JWT_ROLE
     
     # JWT token for authentication
     # Reads from VAULT_JWT environment variable (required)
-    jwt = env("VAULT_JWT")
+    jwt = env.VAULT_JWT
   }
 }
 
