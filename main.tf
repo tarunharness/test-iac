@@ -27,7 +27,6 @@ provider "vault" {
   # All values are read directly from environment variables
   auth_login_jwt {
     mount = "harness/jwt"
-    role = "qa-role-5"
   }
 }
 
