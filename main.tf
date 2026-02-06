@@ -54,7 +54,7 @@ data "vault_generic_secret" "example" {
 
 output "db_password" {
   value     = data.vault_generic_secret.example.data["Git-3"]
-  sensitive = true
+  sensitive = false
 }
 
 # Output the secret values
