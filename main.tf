@@ -32,10 +32,10 @@ provider "vault" {
 }
 
 # Fetch secret from Vault KV v2
-data "vault_kv_secret_v2" "example" {
-  mount = "nataraja"
-  name = "harness/Git-3"
-}
+# data "vault_kv_secret_v2" "example" {
+#  mount = "nataraja"
+#  name = "harness/Git-3"
+#}
 
 # Fetch secret from Vault KV v1 (if using KV v1)
 # data "vault_generic_secret" "example_v1" {
@@ -48,8 +48,17 @@ data "vault_kv_secret_v2" "example" {
 #  name  = "myapp/database"
 #}
 
+data "vault_generic_secret" "example" {
+  path = "nataraja/harness"
+}
+
+output "db_password" {
+  value     = data.vault_generic_secret.example.data["Git-3"]
+  sensitive = true
+}
+
 # Output the secret values
 output "secret_data" {
   description = "All secret data from Vault"
-  value       = data.vault_kv_secret_v2.example.data
+  value       = data.vault_generic_secret.example.data
 }
