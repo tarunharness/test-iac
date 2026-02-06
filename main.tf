@@ -49,7 +49,7 @@ provider "vault" {
 #}
 
 data "vault_generic_secret" "example" {
-  path = "nataraja/harness"
+  path = "secret/nataraja/harness"
 }
 
 output "db_password" {
