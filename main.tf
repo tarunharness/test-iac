@@ -48,17 +48,41 @@ provider "vault" {
 #  name  = "myapp/database"
 #}
 
-data "vault_generic_secret" "example" {
-  path = "secret/nataraja/harness"
+# data "vault_generic_secret" "example" {
+#   path = "secret/nataraja/harness"
+# }
+
+# output "db_password" {
+#   value     = data.vault_generic_secret.example.data["Git-3"]
+#   sensitive = false
+# }
+
+# Fetch secret from Vault
+data "vault_kv_secret_v2" "git_secret" {
+  mount = "nataraja"  # secret engine name
+  name  = "harness"   # location/path
 }
 
-output "db_password" {
-  value     = data.vault_generic_secret.example.data["Git-3"]
-  sensitive = false
+# Output the secret to console
+output "secret_value" {
+  description = "The Git-3 secret value from Vault"
+  value       = data.vault_kv_secret_v2.git_secret.data["Git-3"]
+  sensitive   = true
 }
 
-# Output the secret values
-output "secret_data" {
-  description = "All secret data from Vault"
-  value       = data.vault_generic_secret.example.data
+# Output all secrets at this path (optional)
+output "all_secrets" {
+  description = "All secrets at the harness path"
+  value       = data.vault_kv_secret_v2.git_secret.data
+  sensitive   = true
+}
+
+# Output metadata (optional)
+output "secret_metadata" {
+  description = "Metadata about the secret"
+  value = {
+    version     = data.vault_kv_secret_v2.git_secret.version
+    created_time = data.vault_kv_secret_v2.git_secret.created_time
+    path        = data.vault_kv_secret_v2.git_secret.path
+  }
 }
