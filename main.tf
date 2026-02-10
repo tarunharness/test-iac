@@ -71,10 +71,20 @@ provider "vault" {
 
 # Fetch secret from Vault
 # Equivalent to: vault kv get nataraja/harness/Git-3
-data "vault_kv_secret_v2" "git_secret" {
-  mount = "nataraja"        # secret engine name
-  name  = "harness/Git-3"   # full path to the secret
+#data "vault_kv_secret_v2" "git_secret" {
+#  mount = "nataraja"        # secret engine name
+#  name  = "harness/Git-3"   # full path to the secret
+#}
+
+
+data "vault_generic_secret" "git_secret" { 
+  path = "nataraja/data/harness/Git-3"
+} 
+output "git_secret_value" { 
+  value = data.vault_generic_secret.git_secret.data["value"] 
+  sensitive = true 
 }
+
 
 # Output the secret data to console
 #output "secret_data" {
@@ -83,8 +93,8 @@ data "vault_kv_secret_v2" "git_secret" {
 #  sensitive   = true
 #}
 
-output "secret_data" {
-  description = "All key-value pairs in the Git-3 secret"
-  value       = data.vault_kv_secret_v2.git_secret.data["value"]
-  sensitive   = false
-}
+#output "secret_data" {
+#  description = "All key-value pairs in the Git-3 secret"
+#  value       = data.vault_kv_secret_v2.git_secret.data["value"]
+#  sensitive   = false
+#}
