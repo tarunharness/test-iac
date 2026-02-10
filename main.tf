@@ -11,18 +11,6 @@ terraform {
   }
 }
 
-variable "VAULT_JWT_ROLE" {
-  description = "JWT role"
-  type        = string
-  sensitive   = false
-}
-
-variable "VAULT_JWT_MOUNT_PATH" {
-  description = "JWT mount path"
-  type        = string
-  sensitive   = false
-}
-
 # Vault provider configuration using JWT authentication
 # The provider will automatically read these environment variables:
 # - VAULT_ADDR (required)
@@ -38,8 +26,8 @@ provider "vault" {
   # JWT authentication configuration
   # All values are read directly from environment variables
   auth_login_jwt {
-    role = var.VAULT_JWT_ROLE
-    mount = var.VAULT_JWT_MOUNT_PATH
+    role = env.VAULT_JWT_ROLE
+    mount = env.VAULT_JWT_MOUNT_PATH
   }
 }
 
