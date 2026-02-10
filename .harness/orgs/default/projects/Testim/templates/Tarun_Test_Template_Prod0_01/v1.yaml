@@ -1,0 +1,38 @@
+template:
+  name: Tarun_Test_Template_Prod0_01
+  identifier: Tarun_Test_Template_Prod0_01
+  projectIdentifier: Testim
+  orgIdentifier: default
+  versionLabel: v1
+  type: Workspace
+  tags: {}
+  spec:
+    provider:
+      type: others
+      title: thirdPartyGitProvider
+      info: thirdPartyGitProviderInfo
+      icon: service-github
+      size: 20
+      disabled: false
+    tags: []
+    cost_estimation:
+      enabled: false
+      locked: false
+    default_pipelines:
+      plan: ""
+      apply: ""
+      destroy: ""
+      drift: ""
+      locked: true
+    provisioner:
+      type: terraform
+      version: 1.5.6
+      locked: true
+    repository:
+      isHarnessCode: false
+      connector: TarunGithub
+      branch: main
+      gitFetchType: branch
+      locked: true
+    variables: []
+    terraform_variables: []
