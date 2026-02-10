@@ -77,18 +77,14 @@ data "vault_kv_secret_v2" "git_secret" {
 }
 
 # Output the secret data to console
+#output "secret_data" {
+#  description = "All key-value pairs in the Git-3 secret"
+#  value       = data.vault_kv_secret_v2.git_secret.data
+#  sensitive   = true
+#}
+
 output "secret_data" {
   description = "All key-value pairs in the Git-3 secret"
-  value       = data.vault_kv_secret_v2.git_secret.data
-  sensitive   = true
-}
-
-# Output metadata (optional)
-output "secret_metadata" {
-  description = "Metadata about the secret"
-  value = {
-    version      = data.vault_kv_secret_v2.git_secret.version
-    created_time = data.vault_kv_secret_v2.git_secret.created_time
-    path         = data.vault_kv_secret_v2.git_secret.path
-  }
+  value       = data.vault_kv_secret_v2.git_secret.data["value"]
+  sensitive   = false
 }
