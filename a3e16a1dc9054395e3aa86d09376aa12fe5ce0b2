@@ -1,0 +1,54 @@
+main.tf
+  human 3-5,9-26,28-37,39-42,44-49
+"main copy.tf"
+  human 1-19
+---
+{
+  "attestations": [
+    {
+      "entries": [
+        {
+          "accepted_lines": 41,
+          "added_lines": 41,
+          "deleted_lines": 0,
+          "hash": "human",
+          "lines": "3-5,9-26,28-37,39-42,44-49",
+          "overridden_lines": 0
+        }
+      ],
+      "file": "main.tf"
+    },
+    {
+      "entries": [
+        {
+          "accepted_lines": 19,
+          "added_lines": 19,
+          "deleted_lines": 0,
+          "hash": "human",
+          "lines": "1-19",
+          "overridden_lines": 0
+        }
+      ],
+      "file": "main copy.tf"
+    }
+  ],
+  "base_commit_sha": "b3ced760bf202ea7c3f4386dc4f642eca7614a92",
+  "branch": "main",
+  "commit_sha": "a3e16a1dc9054395e3aa86d09376aa12fe5ce0b2",
+  "commit_time": "2026-05-07T15:50:13+05:30",
+  "commit_type": "direct_commit",
+  "git_ai_version": "1.4.2",
+  "prompts": {
+    "human": {
+      "accepted_lines": 60,
+      "agent_id": null,
+      "human_author": "Tarun Israni <tarun.israni@harness.io>",
+      "messages": [],
+      "overriden_lines": 0,
+      "total_additions": 60,
+      "total_deletions": 0
+    }
+  },
+  "repo": "git@github.com:tarunharness/test-iac.git",
+  "schema_version": "authorship/3.0.0"
+}
