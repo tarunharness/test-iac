@@ -1,0 +1,54 @@
+backup.tf
+  human 1-19
+"main copy.tf"
+  human 1-19
+---
+{
+  "attestations": [
+    {
+      "entries": [
+        {
+          "accepted_lines": 19,
+          "added_lines": 19,
+          "deleted_lines": 0,
+          "hash": "human",
+          "lines": "1-19",
+          "overridden_lines": 0
+        }
+      ],
+      "file": "backup.tf"
+    },
+    {
+      "entries": [
+        {
+          "accepted_lines": 0,
+          "added_lines": 0,
+          "deleted_lines": 19,
+          "hash": "human",
+          "lines": "1-19",
+          "overridden_lines": 0
+        }
+      ],
+      "file": "main copy.tf"
+    }
+  ],
+  "base_commit_sha": "a3e16a1dc9054395e3aa86d09376aa12fe5ce0b2",
+  "branch": "main",
+  "commit_sha": "1015be70e7d765eba05ebee25a3bbe5d2daf01fe",
+  "commit_time": "2026-05-07T15:52:11+05:30",
+  "commit_type": "direct_commit",
+  "git_ai_version": "1.4.2",
+  "prompts": {
+    "human": {
+      "accepted_lines": 19,
+      "agent_id": null,
+      "human_author": "Tarun Israni <tarun.israni@harness.io>",
+      "messages": [],
+      "overriden_lines": 0,
+      "total_additions": 19,
+      "total_deletions": 0
+    }
+  },
+  "repo": "git@github.com:tarunharness/test-iac.git",
+  "schema_version": "authorship/3.0.0"
+}
