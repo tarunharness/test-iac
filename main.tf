@@ -1,19 +1,49 @@
 terraform {
   required_providers {
-    null = {
-      source  = "hashicorp/null"
-      version = "~> 3.0"
+    harness = {
+      source = "harness/harness"
+      version = "0.37.7"
     }
   }
 }
+provider "harness" {
+endpoint         = "https://tarunisrani.pr2.harness.io/gateway"
+  account_id       = "eCXZETaEScKByXZ8yrzxXA"
+  platform_api_key = var.test_token 
+}
+resource "harness_platform_workspace" "tp2" {
+  name                    = "tp2"
+  identifier              = "tp2"
+  org_id                  = "default"
+  project_id              = "Testim"
+  provisioner_type        = "terraform"
+  provisioner_version     = "1.5.6"
+  repository              = ""
+  repository_branch       = "main"
+  repository_path         = ""
+  cost_estimation_enabled = true
+  provider_connector      = "TarunAWSConnector"
+  repository_connector    = "TarunGithubConnectorPython"
 
-provider "null" {}
+  terraform_variable {
+    key        = "instance_name"
+    value      = "testvm"
+    value_type = "string"
+  }
+  terraform_variable {
+    key        = "type"
+    value      = "t2.nano"
+    value_type = "string"
+  }
 
-# Embed a large static JSON data structure in the triggers
-resource "null_resource" "example" {
-  count = 1
-
-  triggers = {
-    large_data = file("large_data_1mb.json")
+  environment_variable {
+    key        = "key1"
+    value      = "val1"
+    value_type = "string"
+  }
+  environment_variable {
+    key        = "key2"
+    value      = "val2"
+    value_type = "string"
   }
 }
