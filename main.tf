@@ -11,6 +11,12 @@ endpoint         = "https://tarunisrani.pr2.harness.io/gateway"
   account_id       = "eCXZETaEScKByXZ8yrzxXA"
   platform_api_key = var.test_token 
 }
+
+variable "test_token" {
+  type = string
+  description = "test token"
+}
+
 resource "harness_platform_workspace" "tp2" {
   name                    = "tp2"
   identifier              = "tp2"
