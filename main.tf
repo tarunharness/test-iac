@@ -7,8 +7,8 @@ terraform {
   }
 }
 provider "harness" {
-  endpoint         = "https://qa.harness.io/gateway"
-  account_id       = "25NKDX79QPC-YTyninmxRQ"
+endpoint         = "https://tarunisrani.pr2.harness.io/gateway"
+  account_id       = "eCXZETaEScKByXZ8yrzxXA"
   platform_api_key = var.test_token 
 }
 
@@ -17,11 +17,11 @@ variable "test_token" {
   description = "test token"
 }
 
-resource "harness_platform_workspace" "tp3" {
-  name                    = "tp3"
-  identifier              = "tp3"
+resource "harness_platform_workspace" "tp2" {
+  name                    = "tp2"
+  identifier              = "tp2"
   org_id                  = "default"
-  project_id              = "Tarun_Test_Project"
+  project_id              = "Testim"
   provisioner_type        = "terraform"
   provisioner_version     = "1.5.6"
   repository              = ""
@@ -29,7 +29,7 @@ resource "harness_platform_workspace" "tp3" {
   repository_path         = ""
   cost_estimation_enabled = true
   provider_connector      = "TarunAWSConnector"
-  repository_connector    = "tarunGitConnector"
+  repository_connector    = "TarunGithubConnectorPython"
 
   terraform_variable {
     key        = "instance_name"
