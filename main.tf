@@ -17,9 +17,9 @@ variable "test_token" {
   description = "test token"
 }
 
-resource "harness_platform_workspace" "tp3" {
-  name                    = "tp3"
-  identifier              = "tp3"
+resource "harness_platform_workspace" "tp4" {
+  name                    = "tp4"
+  identifier              = "tp4"
   org_id                  = "default"
   project_id              = "Testim"
   provisioner_type        = "terraform"
@@ -28,7 +28,7 @@ resource "harness_platform_workspace" "tp3" {
   repository_branch       = "main"
   repository_path         = ""
   cost_estimation_enabled = true
-  provider_connector      = "TarunAWSConnector"
+  provider_connector      = "tarun_vault"
   repository_connector    = "TarunGithubConnectorPython"
 
   terraform_variable {
