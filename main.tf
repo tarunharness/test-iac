@@ -28,8 +28,8 @@ resource "harness_platform_workspace" "tp3" {
   repository_branch       = "main"
   repository_path         = ""
   cost_estimation_enabled = true
-  provider_connector      = "TarunAWSConnector"
-  repository_connector    = "TarunGithubConnectorPython"
+  provider_connector      = "tarun_vault"
+  repository_connector    = "tarunGitConnector"
 
   terraform_variable {
     key        = "instance_name"
