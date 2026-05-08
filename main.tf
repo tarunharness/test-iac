@@ -7,8 +7,8 @@ terraform {
   }
 }
 provider "harness" {
-endpoint         = "https://tarunisrani.pr2.harness.io/gateway"
-  account_id       = "eCXZETaEScKByXZ8yrzxXA"
+  endpoint         = "https://qa.harness.io/gateway"
+  account_id       = "25NKDX79QPC-YTyninmxRQ"
   platform_api_key = var.test_token 
 }
 
@@ -29,7 +29,7 @@ resource "harness_platform_workspace" "tp4" {
   repository_path         = ""
   cost_estimation_enabled = true
   provider_connector      = "tarun_vault"
-  repository_connector    = "TarunGithubConnectorPython"
+  repository_connector    = "tarunGitConnector"
 
   terraform_variable {
     key        = "instance_name"
