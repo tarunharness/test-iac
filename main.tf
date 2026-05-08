@@ -21,7 +21,7 @@ resource "harness_platform_workspace" "tp4" {
   name                    = "tp4"
   identifier              = "tp4"
   org_id                  = "default"
-  project_id              = "Testim"
+  project_id              = "Tarun_Test_Project"
   provisioner_type        = "terraform"
   provisioner_version     = "1.5.6"
   repository              = ""
