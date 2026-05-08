@@ -29,7 +29,7 @@ resource "harness_platform_workspace" "tp4" {
   repository_path         = ""
   cost_estimation_enabled = true
   provider_connector      = "tarun_vault"
-  repository_connector    = "git-amogh-module"
+  repository_connector    = "TarunGithubConnectorPython"
 
   terraform_variable {
     key        = "instance_name"
