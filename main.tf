@@ -17,9 +17,9 @@ variable "test_token" {
   description = "test token"
 }
 
-resource "harness_platform_workspace" "tp2" {
-  name                    = "tp2"
-  identifier              = "tp2"
+resource "harness_platform_workspace" "tp3" {
+  name                    = "tp3"
+  identifier              = "tp3"
   org_id                  = "default"
   project_id              = "Testim"
   provisioner_type        = "terraform"
