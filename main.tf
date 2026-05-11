@@ -57,18 +57,21 @@ resource "harness_platform_workspace" "tp6" {
   }
 }
 
-resource "harness_platform_connector_vault" "vault" {                                                                                                                                                                                                                                                                                                                                                                          
-    identifier  = "my_vault_connector"                                                                                                                                                                                                                                                                                                                                                                                           
-    name        = "My Vault Connector"                                                                                                                                                                                                                                                                                                                                                                                           
-    org_id      = "default"                                                                                                                                                                                                                                                                                                                                                                                                       
-    project_id  = "Tarun_Test_Project"                                                                                                                                                                                                                                                                                                                                                                                                   
-                                                                                                                                                                                                                                                                                                                                                                                                                                 
-    vault_url                     = "http://34.135.118.41:8200"                                                                                                                                                                                                                                                                                                                                                                  
-    base_path                     = "harness/"                                                                                                                                                                                                                                                                                                                                                                                    
-    default_secret_manager        = false                                                                                                                                                                                                                                                                                                                                                                                        
-                                                                                                                                                                                                                                                                                                                                                                                                                                 
-    auth_token {                                                                                                                                                                                                                                                                                                                                                                                                                 
-      token_ref = "project.tarunvaultsecret"                                                                                                                                                                                                                                                                                                                                                                                   
-    }                                                                                                                                                                                                                                                                                                                                                                                                                            
-  }  
+resource "harness_platform_connector_vault" "token" {
+  identifier  = "my_vault_connector"
+  name        = "My Vault Connector"
+  description = "test"
 
+  auth_token                        = "project.tarunvaultsecret"
+  base_path                         = "/harness"
+  access_type                       = "TOKEN"
+  default                           = false
+  renewal_interval_minutes          = 0
+  secret_engine_manually_configured = true
+  secret_engine_name                = "nataraja"
+  secret_engine_version             = 2
+  use_aws_iam                       = false
+  use_k8s_auth                      = false
+  vault_url                         = "http://34.135.118.41:8200"
+  use_jwt_auth                      = false
+}
