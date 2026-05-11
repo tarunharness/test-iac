@@ -34,14 +34,6 @@ resource "harness_platform_workspace" "tp5" {
     type          = "aws"                                                                                                                                                                                                                                                                                                                                                                                                    
   }
 
-  connector {                                                                                                                                                                                                                                                                                                                                                                                                                          
-    connector_ref = "tarun_vault"                                                                                                                                                                                                                                                                                                                                                                                       
-    type          = "vault"                                                                                                                                                                                                                                                                                                                                                                                                    
-  }                                                                                                                                                                                                                                                                                                                                                                                                                          
-
-                                                                                                                                                                                                                                                                                                                                                                                                                         
-   
-
   terraform_variable {
     key        = "instance_name"
     value      = "testvm"
