@@ -1,13 +1,12 @@
 terraform {
   required_providers {
-    taruntestproviderreg = {
+    harness = {
       source = "provider.qa.harness.io/gi2u4s2ela3tsukqimwvsvdznzuw43lykjiq/taruntestproviderreg"
-      version = "1.0.0"
+      version = "2.3.0"
     }
   }
 }
-
-provider "taruntestproviderreg" {
+provider "harness" {
   endpoint         = "https://qa.harness.io/gateway"
   account_id       = "25NKDX79QPC-YTyninmxRQ"
   platform_api_key = var.test_token 
@@ -18,9 +17,9 @@ variable "test_token" {
   description = "test token"
 }
 
-resource "harness_platform_workspace" "tp8" {
-  name                    = "tp8"
-  identifier              = "tp8"
+resource "harness_platform_workspace" "tp9" {
+  name                    = "tp9"
+  identifier              = "tp9"
   org_id                  = "default"
   project_id              = "Tarun_Test_Project"
   provisioner_type        = "terraform"
