@@ -17,9 +17,9 @@ variable "test_token" {
   description = "test token"
 }
 
-resource "harness_platform_workspace" "tp6" {
-  name                    = "tp6"
-  identifier              = "tp6"
+resource "harness_platform_workspace" "tp8" {
+  name                    = "tp8"
+  identifier              = "tp8"
   org_id                  = "default"
   project_id              = "Tarun_Test_Project"
   provisioner_type        = "terraform"
@@ -29,9 +29,15 @@ resource "harness_platform_workspace" "tp6" {
   repository_path         = ""
   cost_estimation_enabled = true
   repository_connector    = "tarunGitConnector"
-  connector {                                                                                                                                                                                                                                                                                                                                                                                                                          
-    connector_ref = "Tarun_AWS_CloudProvider_Test"                                                                                                                                                                                                                                                                                                                                                                                       
-    type          = "aws"                                                                                                                                                                                                                                                                                                                                                                                                    
+  
+  connector {                                                                                                                                                                                                      
+    connector_ref = "Tarun_AWS_CloudProvider_Test"
+    type          = "aws"
+  }
+
+  connector {                                                                                                                                                                                                      
+    connector_ref = "tarun_vault"
+    type          = "vault"
   }
 
   terraform_variable {
@@ -55,23 +61,4 @@ resource "harness_platform_workspace" "tp6" {
     value      = "val2"
     value_type = "string"
   }
-}
-
-resource "harness_platform_connector_vault" "token" {
-  identifier  = "my_vault_connector"
-  name        = "My Vault Connector"
-  description = "test"
-
-  auth_token                        = "project.tarunvaultsecret"
-  base_path                         = "/harness"
-  access_type                       = "TOKEN"
-  default                           = false
-  renewal_interval_minutes          = 0
-  secret_engine_manually_configured = true
-  secret_engine_name                = "nataraja"
-  secret_engine_version             = 2
-  use_aws_iam                       = false
-  use_k8s_auth                      = false
-  vault_url                         = "http://34.135.118.41:8200"
-  use_jwt_auth                      = false
 }
