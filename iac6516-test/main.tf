@@ -5,3 +5,4 @@ terraform {
 }
 
 resource "null_resource" "iac6516" {}
+resource "null_resource" "iac6516_extra" {}
