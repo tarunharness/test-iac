@@ -1,12 +1,13 @@
 terraform {
   required_providers {
-    harness = {
-      source = "harness/harness"
-      version = "0.37.7"
+    taruntestproviderreg = {
+      source = "provider.qa.harness.io/gi2u4s2ela3tsukqimwvsvdznzuw43lykjiq/taruntestproviderreg"
+      version = "1.0.0"
     }
   }
 }
-provider "harness" {
+
+provider "taruntestproviderreg" {
   endpoint         = "https://qa.harness.io/gateway"
   account_id       = "25NKDX79QPC-YTyninmxRQ"
   platform_api_key = var.test_token 
