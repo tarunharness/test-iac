@@ -2,7 +2,7 @@ terraform {
   required_providers {
     harness = {
       source = "harness/harness"
-      version = "0.42.7"
+      version = "0.42.8"
     }
   }
 }
@@ -17,13 +17,13 @@ variable "test_token" {
   description = "test token"
 }
 
-resource "harness_platform_workspace" "tp10" {
-  name                    = "tp10"
-  identifier              = "tp10"
+resource "harness_platform_workspace" "tp14" {
+  name                    = "tp14"
+  identifier              = "tp14"
   org_id                  = "default"
   project_id              = "Tarun_Test_Project"
-  provisioner_type        = "terraform"
-  provisioner_version     = "1.5.6"
+  provisioner_type        = "awscdk"
+  provisioner_version     = "2.1107.0"
   repository              = ""
   repository_branch       = "main"
   repository_path         = ""
@@ -38,27 +38,5 @@ resource "harness_platform_workspace" "tp10" {
   connector {                                                                                                                                                                                                      
     connector_ref = "tarun_vault"
     type          = "vault"
-  }
-
-  terraform_variable {
-    key        = "instance_name"
-    value      = "testvm"
-    value_type = "string"
-  }
-  terraform_variable {
-    key        = "type"
-    value      = "t2.nano"
-    value_type = "string"
-  }
-
-  environment_variable {
-    key        = "key1"
-    value      = "val1"
-    value_type = "string"
-  }
-  environment_variable {
-    key        = "key2"
-    value      = "val2"
-    value_type = "string"
   }
 }
