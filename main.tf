@@ -39,4 +39,10 @@ resource "harness_platform_workspace" "tp14" {
     connector_ref = "tarun_vault"
     type          = "vault"
   }
+  provisioner_config {
+    language                = "typescript"
+    language_version        = "24.13.0"
+    package_manager         = "npm"
+    package_manager_version = "11.11.0"
+  }
 }
