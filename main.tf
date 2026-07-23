@@ -1,8 +1,8 @@
 ##############################################################
 # Terraform configuration generating 10,000,000 resources total:
-#   - 20000 S3 buckets
-#   - 10000 EC2 instances
-#   - 10000 SQS queues
+#   - 40000 S3 buckets
+#   - 20000 EC2 instances
+#   - 20000 SQS queues
 #
 # WARNING: This is NOT deployable against a real AWS account.
 #   - S3: default account limit is ~100 buckets (soft-raisable
@@ -53,19 +53,19 @@ variable "aws_region" {
 variable "s3_bucket_count" {
   description = "Number of S3 buckets to create (NOTE: AWS hard-limits accounts to ~100 buckets by default; this value is for HCL/code-gen scale-testing only, not a realistic deploy target)"
   type        = number
-  default     = 20000
+  default     = 40000
 }
 
 variable "ec2_instance_count" {
   description = "Number of EC2 instances to create (NOTE: will hit EC2 vCPU quota almost immediately; not realistically deployable at this scale)"
   type        = number
-  default     = 10000
+  default     = 20000
 }
 
 variable "sqs_queue_count" {
   description = "Number of SQS queues to create"
   type        = number
-  default     = 10000
+  default     = 20000
 }
 
 variable "ec2_ami" {
@@ -113,7 +113,7 @@ resource "random_id" "bucket_suffix" {
 }
 
 ##############################################################
-# S3 Buckets  (20000 resources)
+# S3 Buckets  (40000 resources)
 ##############################################################
 
 resource "aws_s3_bucket" "bulk" {
@@ -130,7 +130,7 @@ resource "aws_s3_bucket" "bulk" {
 }
 
 ##############################################################
-# EC2 Instances (10000 resources)
+# EC2 Instances (20000 resources)
 ##############################################################
 
 resource "aws_instance" "bulk" {
@@ -148,7 +148,7 @@ resource "aws_instance" "bulk" {
 }
 
 ##############################################################
-# SQS Queues (10000 resources)
+# SQS Queues (20000 resources)
 ##############################################################
 
 resource "aws_sqs_queue" "bulk" {
