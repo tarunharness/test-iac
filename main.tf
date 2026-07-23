@@ -133,19 +133,19 @@ resource "aws_s3_bucket" "bulk" {
 # EC2 Instances (3,333 resources)
 ##############################################################
 
-resource "aws_instance" "bulk" {
-  count = var.ec2_instance_count
-
-  ami           = var.ec2_ami != "" ? var.ec2_ami : data.aws_ami.amazon_linux.id
-  instance_type = var.ec2_instance_type
-
-  tags = {
-    Name      = "${var.name_prefix}-ec2-${count.index}"
-    Index     = count.index
-    Type      = "ec2-instance"
-    ManagedBy = "terraform"
-  }
-}
+# resource "aws_instance" "bulk" {
+#  count = var.ec2_instance_count
+#
+#  ami           = var.ec2_ami != "" ? var.ec2_ami : data.aws_ami.amazon_linux.id
+#  instance_type = var.ec2_instance_type
+#
+#  tags = {
+#   Name      = "${var.name_prefix}-ec2-${count.index}"
+#   Index     = count.index
+#   Type      = "ec2-instance"
+#   ManagedBy = "terraform"
+# }
+#}
 
 ##############################################################
 # SQS Queues (3,333 resources)
@@ -178,10 +178,10 @@ output "s3_bucket_names" {
   value       = aws_s3_bucket.bulk[*].bucket
 }
 
-output "ec2_instance_ids" {
-  description = "IDs of created EC2 instances"
-  value       = aws_instance.bulk[*].id
-}
+#output "ec2_instance_ids" {
+# description = "IDs of created EC2 instances"
+# value       = aws_instance.bulk[*].id
+#}
 
 output "sqs_queue_urls" {
   description = "URLs of created SQS queues"
