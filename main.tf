@@ -1,8 +1,8 @@
 ##############################################################
 # Terraform configuration generating 10,000,000 resources total:
-#   - 3,334 S3 buckets
-#   - 3,333 EC2 instances
-#   - 3,333 SQS queues
+#   - 3,333,34 S3 buckets
+#   - 3,333,33 EC2 instances
+#   - 3,333,33 SQS queues
 #
 # WARNING: This is NOT deployable against a real AWS account.
 #   - S3: default account limit is ~100 buckets (soft-raisable
@@ -25,10 +25,10 @@ terraform {
   required_version = ">= 1.3.0"
 
   required_providers {
-    #aws = {
-    #  source  = "hashicorp/aws"
-    #  version = "~> 5.0"
-    #}
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 5.0"
+    }
     random = {
       source  = "hashicorp/random"
       version = "~> 3.5"
@@ -36,9 +36,9 @@ terraform {
   }
 }
 
-#provider "aws" {
-#  region = var.aws_region
-#}
+provider "aws" {
+  region = var.aws_region
+}
 
 ##############################################################
 # Variables
@@ -53,19 +53,19 @@ variable "aws_region" {
 variable "s3_bucket_count" {
   description = "Number of S3 buckets to create (NOTE: AWS hard-limits accounts to ~100 buckets by default; this value is for HCL/code-gen scale-testing only, not a realistic deploy target)"
   type        = number
-  default     = 3334
+  default     = 333334
 }
 
 variable "ec2_instance_count" {
   description = "Number of EC2 instances to create (NOTE: will hit EC2 vCPU quota almost immediately; not realistically deployable at this scale)"
   type        = number
-  default     = 3333
+  default     = 333333
 }
 
 variable "sqs_queue_count" {
   description = "Number of SQS queues to create"
   type        = number
-  default     = 3333
+  default     = 333333
 }
 
 variable "ec2_ami" {
@@ -113,7 +113,7 @@ resource "random_id" "bucket_suffix" {
 }
 
 ##############################################################
-# S3 Buckets  (3,334 resources)
+# S3 Buckets  (3,333,334 resources)
 ##############################################################
 
 resource "aws_s3_bucket" "bulk" {
@@ -130,25 +130,25 @@ resource "aws_s3_bucket" "bulk" {
 }
 
 ##############################################################
-# EC2 Instances (3,333 resources)
+# EC2 Instances (3,333,333 resources)
 ##############################################################
 
-# resource "aws_instance" "bulk" {
-#  count = var.ec2_instance_count
-#
-#  ami           = var.ec2_ami != "" ? var.ec2_ami : data.aws_ami.amazon_linux.id
-#  instance_type = var.ec2_instance_type
-#
-#  tags = {
-#   Name      = "${var.name_prefix}-ec2-${count.index}"
-#   Index     = count.index
-#   Type      = "ec2-instance"
-#   ManagedBy = "terraform"
-# }
-#}
+resource "aws_instance" "bulk" {
+  count = var.ec2_instance_count
+
+  ami           = var.ec2_ami != "" ? var.ec2_ami : data.aws_ami.amazon_linux.id
+  instance_type = var.ec2_instance_type
+
+  tags = {
+    Name      = "${var.name_prefix}-ec2-${count.index}"
+    Index     = count.index
+    Type      = "ec2-instance"
+    ManagedBy = "terraform"
+  }
+}
 
 ##############################################################
-# SQS Queues (3,333 resources)
+# SQS Queues (3,333,333 resources)
 ##############################################################
 
 resource "aws_sqs_queue" "bulk" {
@@ -178,10 +178,10 @@ output "s3_bucket_names" {
   value       = aws_s3_bucket.bulk[*].bucket
 }
 
-#output "ec2_instance_ids" {
-# description = "IDs of created EC2 instances"
-# value       = aws_instance.bulk[*].id
-#}
+output "ec2_instance_ids" {
+  description = "IDs of created EC2 instances"
+  value       = aws_instance.bulk[*].id
+}
 
 output "sqs_queue_urls" {
   description = "URLs of created SQS queues"
