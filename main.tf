@@ -1,6 +1,6 @@
 ##############################################################
 # Terraform configuration generating 10,000,000 resources total:
-#   - 2000 S3 buckets
+#   - 4000 S3 buckets
 #   - 2000 EC2 instances
 #   - 2000 SQS queues
 #
@@ -53,7 +53,7 @@ variable "aws_region" {
 variable "s3_bucket_count" {
   description = "Number of S3 buckets to create (NOTE: AWS hard-limits accounts to ~100 buckets by default; this value is for HCL/code-gen scale-testing only, not a realistic deploy target)"
   type        = number
-  default     = 2000
+  default     = 4000
 }
 
 variable "ec2_instance_count" {
@@ -113,7 +113,7 @@ resource "random_id" "bucket_suffix" {
 }
 
 ##############################################################
-# S3 Buckets  (2000 resources)
+# S3 Buckets  (4000 resources)
 ##############################################################
 
 resource "aws_s3_bucket" "bulk" {
