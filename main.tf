@@ -38,6 +38,7 @@ terraform {
 
 provider "aws" {
   region = var.aws_region
+  profile = "tarun"
 }
 
 ##############################################################
@@ -54,30 +55,6 @@ variable "s3_bucket_count" {
   description = "Number of S3 buckets to create (NOTE: AWS hard-limits accounts to ~100 buckets by default; this value is for HCL/code-gen scale-testing only, not a realistic deploy target)"
   type        = number
   default     = 2000
-}
-
-variable "ec2_instance_count" {
-  description = "Number of EC2 instances to create (NOTE: will hit EC2 vCPU quota almost immediately; not realistically deployable at this scale)"
-  type        = number
-  default     = 1000
-}
-
-variable "sqs_queue_count" {
-  description = "Number of SQS queues to create"
-  type        = number
-  default     = 1000
-}
-
-variable "ec2_ami" {
-  description = "AMI ID to use for EC2 instances (defaults to latest Amazon Linux 2023 if not overridden)"
-  type        = string
-  default     = ""
-}
-
-variable "ec2_instance_type" {
-  description = "Instance type for generated EC2 instances"
-  type        = string
-  default     = "t3.micro"
 }
 
 variable "name_prefix" {
@@ -129,40 +106,6 @@ resource "aws_s3_bucket" "bulk" {
   }
 }
 
-##############################################################
-# EC2 Instances 1000 resources)
-##############################################################
-
-resource "aws_instance" "bulk" {
-  count = var.ec2_instance_count
-
-  ami           = var.ec2_ami != "" ? var.ec2_ami : data.aws_ami.amazon_linux.id
-  instance_type = var.ec2_instance_type
-
-  tags = {
-    Name      = "${var.name_prefix}-ec2-${count.index}"
-    Index     = count.index
-    Type      = "ec2-instance"
-    ManagedBy = "terraform"
-  }
-}
-
-##############################################################
-# SQS Queues (1000 resources)
-##############################################################
-
-resource "aws_sqs_queue" "bulk" {
-  count = var.sqs_queue_count
-
-  name = "${var.name_prefix}-sqs-${count.index}"
-
-  tags = {
-    Name      = "${var.name_prefix}-sqs-${count.index}"
-    Index     = count.index
-    Type      = "sqs-queue"
-    ManagedBy = "terraform"
-  }
-}
 
 ##############################################################
 # Outputs
@@ -170,20 +113,10 @@ resource "aws_sqs_queue" "bulk" {
 
 output "total_resource_count" {
   description = "Total number of primary resources created by this configuration"
-  value       = var.s3_bucket_count + var.ec2_instance_count + var.sqs_queue_count
+  value       = var.s3_bucket_count
 }
 
 output "s3_bucket_names" {
   description = "Names of created S3 buckets"
   value       = aws_s3_bucket.bulk[*].bucket
-}
-
-output "ec2_instance_ids" {
-  description = "IDs of created EC2 instances"
-  value       = aws_instance.bulk[*].id
-}
-
-output "sqs_queue_urls" {
-  description = "URLs of created SQS queues"
-  value       = aws_sqs_queue.bulk[*].id
 }
